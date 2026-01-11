@@ -1,12 +1,15 @@
 package pages;
 
 import driver.DriverFactory;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.time.Duration;
+import java.util.List;
 
 public class BasePage {
 
@@ -51,5 +54,19 @@ public class BasePage {
     protected String getAttribute(By locator, String value) {
         waitForVisible(locator);
         return driver.findElement(locator).getAttribute(value);
+    }
+
+    protected List<WebElement> findElements(By locator) {
+        waitForVisible(locator);
+        return driver.findElements(locator);
+    }
+
+    protected WebElement scrollToElementById(String resourceId) {
+        return driver.findElement(
+                AppiumBy.androidUIAutomator(
+                        "new UiScrollable(new UiSelector().scrollable(true))" +
+                                ".scrollIntoView(new UiSelector().resourceId(\"" + resourceId + "\"))"
+                )
+        );
     }
 }

@@ -17,11 +17,6 @@ public class LoginSteps {
     private final ProductPage productPage = new ProductPage();
     private final FingerprintPage fingerprintPage = new FingerprintPage();
 
-    @Given("the app is launched")
-    public void the_app_is_launched() {
-        driver = DriverFactory.getDriver();
-    }
-
     @Given("I'm on login screen")
     public void i_on_login_screen() {
         driver = DriverFactory.getDriver();
