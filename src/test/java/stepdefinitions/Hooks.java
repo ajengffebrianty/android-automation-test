@@ -3,13 +3,18 @@ package stepdefinitions;
 import driver.DriverFactory;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import pages.BasePage;
 
 public class Hooks {
+
+    private BasePage basePage;
 
     @Before
     public void setUp() throws Exception {
         try {
-            DriverFactory.initDriver();
+            if (!DriverFactory.isDriverInitialized()) {
+                DriverFactory.initDriver();
+            }
         } catch (Exception e) {
             System.err.println("Failed to initialize driver: " + e.getMessage());
             e.printStackTrace();
@@ -18,9 +23,10 @@ public class Hooks {
     }
 
     @After
-    public void tearDown() {
+    public void resetApp() {
         try {
-            DriverFactory.quitDriver();
+            basePage = new BasePage();
+            basePage.backToHome();
         } catch (Exception e) {
             System.err.println("Error during driver teardown: " + e.getMessage());
             e.printStackTrace();

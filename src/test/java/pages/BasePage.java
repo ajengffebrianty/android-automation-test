@@ -16,6 +16,13 @@ public class BasePage {
     protected AndroidDriver driver;
     protected WebDriverWait wait;
 
+    private By viewMenu = AppiumBy.accessibilityId("View menu");
+    private By catalogMenu = AppiumBy.xpath("//android.widget.TextView[@resource-id=\"com.saucelabs.mydemoapp.android:id/itemTV\" and @text=\"Catalog\"]");
+    private By resetAppStateMenu = AppiumBy.xpath("//android.widget.TextView[@resource-id=\"com.saucelabs.mydemoapp.android:id/itemTV\" and @text=\"Reset App State\"]");
+    private By resetAppStateButton = AppiumBy.id("android:id/button1");
+    private By okButton = AppiumBy.id("android:id/button1");
+
+
     public BasePage() {
         this.driver = DriverFactory.getDriver();
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -69,5 +76,17 @@ public class BasePage {
                                 ".scrollIntoView(new UiSelector().resourceId(\"" + resourceId + "\"))"
                 )
         );
+    }
+
+    public void backToHome() {
+        click(viewMenu);
+        click(catalogMenu);
+    }
+
+    public void resetAppState() {
+        click(viewMenu);
+        click(resetAppStateMenu);
+        click(resetAppStateButton);
+        click(okButton);
     }
 }

@@ -54,6 +54,10 @@ public class DriverFactory {
         return driver;
     }
 
+    public static boolean isDriverInitialized() {
+        return driver != null;
+    }
+
     public static void quitDriver() {
         if (driver != null) {
             try {

@@ -20,12 +20,18 @@ public class CartSteps {
     @Given("user in product detail page")
     public void user_in_product_detail_page() {
         productPage.tapFirstProduct();
+        productName = productPage.getTitlePage();
     }
 
     @Given("user in product page")
     public void user_in_product_page() {
         String getTitlePage = productPage.getTitlePage();
         Assert.assertEquals(getTitlePage, "Products", "Title page does not match!");
+    }
+
+    @When("Reset app state")
+    public void reset_app_state() {
+        cartPage.resetAppState();
     }
 
     @When("Press cart icon on right side")
@@ -54,7 +60,6 @@ public class CartSteps {
 
     @When("user press add to cart button")
     public void user_press_add_to_cart_button() {
-        productName = productPage.getTitlePage();
         productPage.addProductToCart();
     }
 
