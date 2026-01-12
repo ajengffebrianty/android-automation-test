@@ -142,7 +142,7 @@ public class ProductSteps {
 
     @When("user presses the Add to cart button")
     public void the_user_presses_the_Add_to_cart_button() {
-        productPage.addToCartClick();
+        productPage.addProductToCart();
     }
 
     @Then ("Cart number changed")

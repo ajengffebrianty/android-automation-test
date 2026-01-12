@@ -6,7 +6,8 @@ import org.openqa.selenium.WebElement;
 
 public class LoginPage extends BasePage {
 
-    public LoginPage() {}
+    public LoginPage() {
+    }
 
     private By viewMenu = AppiumBy.accessibilityId("View menu");
     private By loginMenu = AppiumBy.xpath("//android.widget.TextView[@resource-id=\"com.saucelabs.mydemoapp.android:id/itemTV\" and @text=\"Log In\"]\n");
@@ -16,6 +17,7 @@ public class LoginPage extends BasePage {
     private By loginButton = AppiumBy.accessibilityId("Tap to login with given credentials");
     private By usernameRequiredErr = AppiumBy.id("com.saucelabs.mydemoapp.android:id/nameErrorTV");
     private By fingerPrintButton = AppiumBy.accessibilityId("Tap to login using biometric verification");
+    private By validLoginButton = AppiumBy.id("com.saucelabs.mydemoapp.android:id/username1TV");
 
     public void goToLoginMenu() {
         click(viewMenu);
@@ -38,14 +40,18 @@ public class LoginPage extends BasePage {
         click(loginButton);
     }
 
+    public void populateValidLogin() {
+        click(validLoginButton);
+    }
     public String getPasswordRequiredErr() {
         return getText(passwordRequiredErr);
     }
+
     public String getUsernameRequiredErr() {
         return getText(usernameRequiredErr);
     }
 
     public boolean fingerPrintButtonAvailable() {
-        return  available(fingerPrintButton);
+        return available(fingerPrintButton);
     }
 }

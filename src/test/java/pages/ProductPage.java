@@ -25,6 +25,8 @@ public class ProductPage extends BasePage {
     private By priceAscSortButton = AppiumBy.accessibilityId("Ascending order by price");
     private By priceDescSortButton = AppiumBy.accessibilityId("Descending order by price");
     private By firstProductElement = AppiumBy.xpath("(//android.widget.ImageView[@resource-id='com.saucelabs.mydemoapp.android:id/productIV'])[1]");
+    private By secondProductElement = AppiumBy.xpath("(//android.widget.ImageView[@resource-id='com.saucelabs.mydemoapp.android:id/productIV'])[3]");
+
     private By cartElement = AppiumBy.id("com.saucelabs.mydemoapp.android:id/cartTV");
     private By productDetailImageElement = AppiumBy.accessibilityId("Displays selected product");
     private By productDetailPriceElement = AppiumBy.id("com.saucelabs.mydemoapp.android:id/priceTV");
@@ -104,6 +106,10 @@ public class ProductPage extends BasePage {
         click(firstProductElement);
     }
 
+    public void tapSecondProduct() {
+        click(secondProductElement);
+    }
+
     public boolean productDetailElementAvailable() {
         boolean element = available(productDetailImageElement) && available(productDetailPriceElement) && available(productDetailColorElement) && available(productDetailAddCartButton);
         return element;
@@ -142,6 +148,11 @@ public class ProductPage extends BasePage {
         click(productDetailAddCartButton);
     }
 
+    public void addProductToCart() {
+        scrollToElementById("com.saucelabs.mydemoapp.android:id/cartBt");
+        click(productDetailAddCartButton);
+    }
+
     private int getCartCount(By cartElement) {
 
         List<WebElement> elements = driver.findElements(cartElement);
@@ -159,6 +170,11 @@ public class ProductPage extends BasePage {
         return Integer.parseInt(textAttr.trim());
     }
 
+    public int getQuantityCount() {
+
+        return getCartCount(cartElement);
+    }
+
     public boolean cartNumberIsValid() {
         int countBefore = getCartCount(cartElement);
 
@@ -169,6 +185,12 @@ public class ProductPage extends BasePage {
 
         return cart;
     }
+
+    public void addQuantity() {
+        scrollToElementById("com.saucelabs.mydemoapp.android:id/noTV");
+        click(increaseQuantityElement);
+    }
+
 
 
 }

@@ -62,6 +62,7 @@ public class BasePage {
     }
 
     protected WebElement scrollToElementById(String resourceId) {
+
         return driver.findElement(
                 AppiumBy.androidUIAutomator(
                         "new UiScrollable(new UiSelector().scrollable(true))" +
